@@ -1,9 +1,8 @@
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001/";
 
 const getAllEmployees = async () => {
-  console.log(API_URL);
   const allEmpResponse = await axios.get(`${API_URL}employee`);
   if (allEmpResponse.status === 200) {
     console.log(allEmpResponse.data.employeeList);

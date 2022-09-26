@@ -1,30 +1,29 @@
-import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
-import '../index.css';
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import "../index.css";
 
 const ErrorComponent = () => {
-    const {state} = useLocation();
-    const {errorMessage}:any= state;
-    const navigate = useNavigate();
-    const goback = (e: any) => {
-        navigate("/board");
-    }
+  const { state } = useLocation();
+  const { errorMessage }: any = state;
+  const navigate = useNavigate();
+  const goback = (e: any) => {
+    navigate("/");
+  };
 
-    return (
-        <div data-testid="errorSection">
-            {errorMessage ? errorMessage
-                :
-                <div>
-                    <p>Oh, ho, Requested News Board Doesnt Exist</p>
-                    <div>
-                        <button onClick={(e) => goback(e)}>Go Back to Previos Page</button>
-                    </div></div>
-            }
-
-           
+  return (
+    <div data-testid="errorSection" style={{ marginTop: "200px" }}>
+      {errorMessage ? (
+        errorMessage
+      ) : (
+        <div>
+          <p>Oh, ho, Error Ocurred...</p>
         </div>
+      )}
+      <div>
+        <button onClick={(e) => goback(e)}>Reload</button>
+      </div>
+    </div>
+  );
+};
 
-    )
-}
-
-export default ErrorComponent
+export default ErrorComponent;

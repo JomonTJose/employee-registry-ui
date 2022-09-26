@@ -16,6 +16,7 @@ import Login from "../Login";
 import useAuth from "../../hooks/useAuth";
 import Register from "../Register";
 import Employee from "../EmployeeList/Employee";
+import ErrorComponent from "../ErrorComponent";
 
 const AppLayout = () => {
   const { auth } = useAuth();
@@ -90,6 +91,7 @@ const AppLayout = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/employees/employee" element={<Employee />} />
+        <Route path="/error" element={<ErrorComponent />} />
       </Routes>
     </>
   );

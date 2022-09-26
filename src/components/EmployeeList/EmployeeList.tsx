@@ -9,7 +9,7 @@ import {
 } from "@mui/x-data-grid";
 import classes from "./styles.module.css";
 import { Box, Button, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CustomModal from "../Modal";
@@ -23,12 +23,15 @@ const EmployeeList = () => {
   let navigate = useNavigate();
 
   const fetchAllEmployees = async () => {
-    const employeeRes = await employeeService.getAllEmployees();
-    console.log(employeeRes);
-    setEmployeeList(employeeRes);
+    try {
+      const employeeRes = await employeeService.getAllEmployees();
+      setEmployeeList(employeeRes);
+    } catch (error: any) {
+      navigate("/error", { state: { errorMessage: error?.code } });
+    }
   };
   useEffect(() => {
-    fetchAllEmployees().catch(console.error);
+    fetchAllEmployees();
   }, []);
 
   const addNewEmployee = () => {
@@ -189,7 +192,12 @@ const EmployeeList = () => {
               Toolbar: CustomToolbar,
             }}
           />
-        ) : null}
+        ) : (
+          <Navigate
+            to={"/error"}
+            state={{ errorMessage: "No Employees present" }}
+          />
+        )}
       </Box>
     </>
   );
