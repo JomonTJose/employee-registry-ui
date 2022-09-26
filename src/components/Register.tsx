@@ -27,6 +27,7 @@ const Register = () => {
   let navigate = useNavigate();
   const { hidePassword, title }: any = state;
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [registerErrorContent, setRegisterErrorContent] = useState<string>("");
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(registerFormSchema),
     mode: "onChange",
@@ -65,11 +66,15 @@ const Register = () => {
             }
           } else {
             setShowError(true);
+            setRegisterErrorContent(data.response.data);
           }
         })
         .catch((err: any) => {
           setShowError(true);
-          console.log(`Error while Registration: ${err.message}`);
+          setRegisterErrorContent(err?.response?.data?.message);
+          console.log(
+            `Error while Registration: ${err?.response?.data?.message}`
+          );
         });
     }
   };
@@ -83,6 +88,7 @@ const Register = () => {
   };
   const closeModal = () => {
     setOpenModal(false);
+    setShowError(false);
   };
   return (
     <div className="col-md-12 col-md-offset-12">
@@ -90,8 +96,8 @@ const Register = () => {
 
       {showError && (
         <CustomModal
-          showModal={openModal}
-          content={"Error while registering"}
+          showModal={showError}
+          content={registerErrorContent}
           size="sm"
           title={"Employee Registration Failed"}
           closeModal={closeModal}

@@ -19,7 +19,7 @@ const EmployeeList = () => {
   const { user } = auth;
   const [showDeletedModal, setDeletedModal] = useState<boolean>(false);
   const [employeeList, setEmployeeList] = useState<EmployeeInfo[]>([]);
-  const [pageSize, setPageSize] = React.useState<number>(20);
+  const [pageSize, setPageSize] = React.useState<number>(10);
   let navigate = useNavigate();
 
   const fetchAllEmployees = async () => {
@@ -146,7 +146,9 @@ const EmployeeList = () => {
   const CustomToolbar = () => {
     return (
       <GridToolbarContainer>
-        <GridToolbarExport csvOptions={{ allColumns: true }} />
+        <GridToolbarExport
+          csvOptions={{ allColumns: true, fileName: "EmployeesList" }}
+        />
       </GridToolbarContainer>
     );
   };
@@ -180,6 +182,9 @@ const EmployeeList = () => {
             rows={employeeList}
             getRowId={(row) => row.id}
             pageSize={pageSize}
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            rowsPerPageOptions={[5, 10, 20, 50]}
+            pagination
             components={{
               Toolbar: CustomToolbar,
             }}
