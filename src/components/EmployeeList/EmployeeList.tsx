@@ -160,7 +160,7 @@ const EmployeeList = () => {
     setDeletedModal(false);
   };
   return (
-    <>
+    <section data-testid="employeelistsection">
       {showDeletedModal && (
         <CustomModal
           content="Employee Deleted Successfully"
@@ -199,7 +199,7 @@ const EmployeeList = () => {
           />
         )}
       </Box>
-    </>
+    </section>
   );
 };
 

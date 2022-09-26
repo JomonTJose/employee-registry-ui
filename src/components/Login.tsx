@@ -46,7 +46,7 @@ const Login = () => {
   };
 
   return (
-    <section>
+    <section data-testid="loginsection">
       <p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
         {errMsg}
       </p>

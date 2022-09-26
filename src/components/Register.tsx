@@ -91,7 +91,7 @@ const Register = () => {
     setShowError(false);
   };
   return (
-    <div className="col-md-12 col-md-offset-12">
+    <div data-testid="registersection" className="col-md-12 col-md-offset-12">
       <h1> {title}</h1>
 
       {showError && (
